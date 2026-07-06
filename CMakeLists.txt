@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(BasicEQ VERSION 1.0.0 LANGUAGES C CXX)
+project(MyAudioPlugin VERSION 1.0.0 LANGUAGES C CXX)
 
 # 1. Force C++20 for modern JUCE development
 set(CMAKE_CXX_STANDARD 20)
@@ -16,7 +16,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(JUCE)
 
 # 3. Create the Audio Effect Plugin target
-juce_add_plugin(BasicEQ
+juce_add_plugin(MyAudioPlugin
     COMPANY_NAME "MyCompany"
     IS_SYNTH FALSE                       # FALSE = Audio Effect (VST3/Standalone)
     NEEDS_MIDI_INPUT FALSE               
@@ -27,7 +27,7 @@ juce_add_plugin(BasicEQ
     PRODUCT_NAME "Basic EQ")
 
 # 4. Point to your source files (ensure these exist in a "Source" folder)
-target_sources(BasicEQ PRIVATE
+target_sources(MyAudioPlugin PRIVATE
     Source/PluginProcessor.cpp
     Source/PluginProcessor.h
     Source/PluginEditor.cpp
@@ -35,7 +35,7 @@ target_sources(BasicEQ PRIVATE
 )
 
 # 5. Link standard JUCE components
-target_link_libraries(BasicEQ PRIVATE
+target_link_libraries(MyAudioPlugin PRIVATE
     juce::juce_audio_utils
     juce::juce_audio_processors
     juce::juce_audio_formats
@@ -49,5 +49,5 @@ target_link_libraries(BasicEQ PRIVATE
 
 # 6. Windows-specific compiler optimization for MSVC
 if(MSVC)
-    target_compile_options(BasicEQ PRIVATE /MP /utf-8)
+    target_compile_options(MyAudioPlugin PRIVATE /MP /utf-8)
 endif()
